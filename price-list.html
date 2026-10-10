@@ -4,43 +4,42 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Прайс-лист — AI-промпт-менеджер</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&subset=cyrillic&display=swap" rel="stylesheet">
   <style>
-    @page {
-      size: A4;
-      margin: 0;
+    @page { size: A4; margin: 0; }
+
+    @font-face {
+      font-family: 'Inter';
+      src: url('Inter-Regular.ttf') format('truetype');
+      font-weight: 400; font-style: normal;
+    }
+    @font-face {
+      font-family: 'Inter';
+      src: url('Inter-Medium.ttf') format('truetype');
+      font-weight: 500; font-style: normal;
+    }
+    @font-face {
+      font-family: 'Inter';
+      src: url('Inter-Bold.ttf') format('truetype');
+      font-weight: 700; font-style: normal;
     }
 
     * { box-sizing: border-box; }
 
     html, body {
-      margin: 0;
-      padding: 0;
-      width: 210mm;
-      height: 297mm;
-      font-family: "Space Grotesk", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
-      background: #000;
-      color: #fff;
-      -webkit-print-color-adjust: exact;
-      print-color-adjust: exact;
+      margin: 0; padding: 0;
+      width: 210mm; height: 297mm;
+      font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      background: #000; color: #fff;
+      -webkit-print-color-adjust: exact; print-color-adjust: exact;
     }
 
     .page {
-      width: 210mm;
-      height: 297mm;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
+      width: 210mm; height: 297mm;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
       padding: 16mm 20mm;
     }
 
-    .wrap {
-      width: 100%;
-      max-width: 130mm;
-    }
+    .wrap { width: 100%; max-width: 130mm; }
 
     .card {
       background: #181818;
@@ -51,72 +50,46 @@
     }
 
     .logo {
-      width: 18mm;
-      height: 18mm;
+      width: 18mm; height: 18mm;
       margin: 0 auto 5mm;
       border-radius: 50%;
       background: #1db954;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      display: flex; align-items: center; justify-content: center;
       font-size: 8mm;
     }
 
-    h1 {
-      margin: 0 0 3mm;
-      font-size: 9mm;
-      font-weight: 700;
-    }
+    h1 { margin: 0 0 3mm; font-size: 9mm; font-weight: 700; }
 
     .subtitle {
-      color: #b3b3b3;
-      font-size: 4.2mm;
-      line-height: 1.5;
-      margin: 0 auto 6mm;
-      max-width: 90mm;
+      color: #b3b3b3; font-size: 4.2mm; line-height: 1.5;
+      margin: 0 auto 6mm; max-width: 90mm;
     }
 
     .features {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 3mm;
-      margin-bottom: 6mm;
-      text-align: left;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 3mm;
+      margin-bottom: 6mm; text-align: left;
     }
 
     .feature {
-      display: flex;
-      align-items: center;
-      gap: 3mm;
+      display: flex; align-items: center; gap: 3mm;
       padding: 3mm;
       background: #121212;
       border: 1px solid rgba(255,255,255,0.08);
       border-radius: 12px;
-      font-size: 3.6mm;
-      color: #b3b3b3;
-      line-height: 1.4;
-      min-height: 14mm;
+      font-size: 3.6mm; color: #b3b3b3;
+      line-height: 1.4; min-height: 14mm;
     }
 
     .feature .icon {
-      width: 8mm;
-      height: 8mm;
-      border-radius: 50%;
+      width: 8mm; height: 8mm; border-radius: 50%;
       background: rgba(29, 185, 84, 0.15);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 4mm;
-      flex-shrink: 0;
-      color: #1db954;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 4mm; flex-shrink: 0; color: #1db954;
     }
 
     .plans {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 3mm;
-      margin-bottom: 6mm;
-      text-align: left;
+      display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 3mm;
+      margin-bottom: 6mm; text-align: left;
     }
 
     .plan {
@@ -124,76 +97,37 @@
       background: #121212;
       border: 1px solid rgba(255,255,255,0.08);
       border-radius: 12px;
-      display: flex;
-      flex-direction: column;
+      display: flex; flex-direction: column;
     }
 
-    .plan h3 {
-      margin: 0 0 2mm;
-      font-size: 4mm;
-      font-weight: 700;
-      color: #fff;
-    }
-
+    .plan h3 { margin: 0 0 2mm; font-size: 4mm; font-weight: 700; color: #fff; }
     .plan.pro h3 { color: #1db954; }
 
-    .plan .price {
-      font-size: 4.5mm;
-      font-weight: 700;
-      color: #fff;
-      margin-bottom: 3mm;
-    }
+    .plan .price { font-size: 4.5mm; font-weight: 700; color: #fff; margin-bottom: 3mm; }
 
-    .plan ul {
-      margin: 0;
-      padding-left: 4mm;
-      font-size: 3.4mm;
-      color: #b3b3b3;
-      line-height: 1.45;
-      flex-grow: 1;
-    }
-
+    .plan ul { margin: 0; padding-left: 4mm; font-size: 3.4mm; color: #b3b3b3; line-height: 1.45; flex-grow: 1; }
     .plan li { margin-bottom: 1.2mm; }
 
     .hint {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 3mm;
+      display: inline-flex; align-items: center; justify-content: center; gap: 3mm;
       padding: 3mm 5mm;
       background: rgba(29, 185, 84, 0.12);
       border: 1px solid rgba(29, 185, 84, 0.25);
       border-radius: 999px;
-      color: #fff;
-      font-size: 3.6mm;
-      margin-bottom: 5mm;
-      width: 100%;
+      color: #fff; font-size: 3.6mm;
+      margin-bottom: 5mm; width: 100%;
     }
 
     .hint .icon {
-      width: 6mm;
-      height: 6mm;
-      border-radius: 6px;
+      width: 6mm; height: 6mm; border-radius: 6px;
       background: #121212;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      display: flex; align-items: center; justify-content: center;
       font-size: 3mm;
     }
 
-    .footer {
-      color: #888;
-      font-size: 3.4mm;
-      text-align: center;
-    }
+    .footer { color: #888; font-size: 3.4mm; text-align: center; }
 
-    .contacts {
-      color: #888;
-      font-size: 3.2mm;
-      text-align: center;
-      margin-top: 3mm;
-      line-height: 1.5;
-    }
+    .contacts { color: #888; font-size: 3.2mm; text-align: center; margin-top: 3mm; line-height: 1.5; }
   </style>
 </head>
 <body>
@@ -202,27 +136,13 @@
       <div class="card">
         <div class="logo">💬</div>
         <h1>AI-промпт-менеджер</h1>
-        <p class="subtitle">
-          Сохраняйте ваши AI-чаты локально. Нажмите на иконку расширения, чтобы открыть библиотеку.
-        </p>
+        <p class="subtitle">Сохраняйте ваши AI-чаты локально. Нажмите на иконку расширения, чтобы открыть библиотеку.</p>
 
         <div class="features">
-          <div class="feature">
-            <span class="icon">📥</span>
-            <span>Экспорт из ChatGPT, Claude, Gemini, DeepSeek, Ashna AI, ГигаЧат</span>
-          </div>
-          <div class="feature">
-            <span class="icon">🔒</span>
-            <span>Всё хранится локально — никакой телеметрии</span>
-          </div>
-          <div class="feature">
-            <span class="icon">🏷️</span>
-            <span>Поиск, теги и библиотека промптов</span>
-          </div>
-          <div class="feature">
-            <span class="icon">⚡</span>
-            <span>Pro — пакетный экспорт и автосейв</span>
-          </div>
+          <div class="feature"><span class="icon">📥</span><span>Экспорт из ChatGPT, Claude, Gemini, DeepSeek, Ashna AI, ГигаЧат</span></div>
+          <div class="feature"><span class="icon">🔒</span><span>Всё хранится локально — никакой телеметрии</span></div>
+          <div class="feature"><span class="icon">🏷️</span><span>Поиск, теги и библиотека промптов</span></div>
+          <div class="feature"><span class="icon">⚡</span><span>Pro — пакетный экспорт и автосейв</span></div>
         </div>
 
         <div class="plans">
