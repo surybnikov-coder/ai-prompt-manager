@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Прайс-лист — AI-промпт-менеджер</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&subset=cyrillic&display=swap" rel="stylesheet">
+  <style>
+    @page {
+      size: A4;
+      margin: 0;
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 210mm;
+      height: 297mm;
+      font-family: "Space Grotesk", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      background: #000;
+      color: #fff;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    .page {
+      width: 210mm;
+      height: 297mm;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 16mm 20mm;
+    }
+
+    .wrap {
+      width: 100%;
+      max-width: 130mm;
+    }
+
+    .card {
+      background: #181818;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px;
+      padding: 10mm 8mm;
+      text-align: center;
+    }
+
+    .logo {
+      width: 18mm;
+      height: 18mm;
+      margin: 0 auto 5mm;
+      border-radius: 50%;
+      background: #1db954;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 8mm;
+    }
+
+    h1 {
+      margin: 0 0 3mm;
+      font-size: 9mm;
+      font-weight: 700;
+    }
+
+    .subtitle {
+      color: #b3b3b3;
+      font-size: 4.2mm;
+      line-height: 1.5;
+      margin: 0 auto 6mm;
+      max-width: 90mm;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3mm;
+      margin-bottom: 6mm;
+      text-align: left;
+    }
+
+    .feature {
+      display: flex;
+      align-items: center;
+      gap: 3mm;
+      padding: 3mm;
+      background: #121212;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 12px;
+      font-size: 3.6mm;
+      color: #b3b3b3;
+      line-height: 1.4;
+      min-height: 14mm;
+    }
+
+    .feature .icon {
+      width: 8mm;
+      height: 8mm;
+      border-radius: 50%;
+      background: rgba(29, 185, 84, 0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 4mm;
+      flex-shrink: 0;
+      color: #1db954;
+    }
+
+    .plans {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 3mm;
+      margin-bottom: 6mm;
+      text-align: left;
+    }
+
+    .plan {
+      padding: 4mm;
+      background: #121212;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 12px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .plan h3 {
+      margin: 0 0 2mm;
+      font-size: 4mm;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .plan.pro h3 { color: #1db954; }
+
+    .plan .price {
+      font-size: 4.5mm;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 3mm;
+    }
+
+    .plan ul {
+      margin: 0;
+      padding-left: 4mm;
+      font-size: 3.4mm;
+      color: #b3b3b3;
+      line-height: 1.45;
+      flex-grow: 1;
+    }
+
+    .plan li { margin-bottom: 1.2mm; }
+
+    .hint {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 3mm;
+      padding: 3mm 5mm;
+      background: rgba(29, 185, 84, 0.12);
+      border: 1px solid rgba(29, 185, 84, 0.25);
+      border-radius: 999px;
+      color: #fff;
+      font-size: 3.6mm;
+      margin-bottom: 5mm;
+      width: 100%;
+    }
+
+    .hint .icon {
+      width: 6mm;
+      height: 6mm;
+      border-radius: 6px;
+      background: #121212;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3mm;
+    }
+
+    .footer {
+      color: #888;
+      font-size: 3.4mm;
+      text-align: center;
+    }
+
+    .contacts {
+      color: #888;
+      font-size: 3.2mm;
+      text-align: center;
+      margin-top: 3mm;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="wrap">
+      <div class="card">
+        <div class="logo">💬</div>
+        <h1>AI-промпт-менеджер</h1>
+        <p class="subtitle">
+          Сохраняйте ваши AI-чаты локально. Нажмите на иконку расширения, чтобы открыть библиотеку.
+        </p>
+
+        <div class="features">
+          <div class="feature">
+            <span class="icon">📥</span>
+            <span>Экспорт из ChatGPT, Claude, Gemini, DeepSeek, Ashna AI, ГигаЧат</span>
+          </div>
+          <div class="feature">
+            <span class="icon">🔒</span>
+            <span>Всё хранится локально — никакой телеметрии</span>
+          </div>
+          <div class="feature">
+            <span class="icon">🏷️</span>
+            <span>Поиск, теги и библиотека промптов</span>
+          </div>
+          <div class="feature">
+            <span class="icon">⚡</span>
+            <span>Pro — пакетный экспорт и автосейв</span>
+          </div>
+        </div>
+
+        <div class="plans">
+          <div class="plan">
+            <h3>Free</h3>
+            <div class="price">0 ₽</div>
+            <ul>
+              <li>До 50 сохранённых диалогов</li>
+              <li>До 20 промптов в библиотеке</li>
+              <li>Экспорт текущего диалога в Markdown</li>
+              <li>Поиск и теги вручную</li>
+              <li>Локальное хранение, без подписки</li>
+            </ul>
+          </div>
+          <div class="plan pro">
+            <h3>Pro Monthly</h3>
+            <div class="price">299 ₽ / мес</div>
+            <ul>
+              <li>Безлимитное число диалогов и промптов</li>
+              <li>Пакетный экспорт всех диалогов в ZIP</li>
+              <li>Поиск по содержимому и тегам</li>
+              <li>Автосохранение диалогов</li>
+              <li>Ежемесячная оплата</li>
+            </ul>
+          </div>
+          <div class="plan pro">
+            <h3>Pro Lifetime</h3>
+            <div class="price">1 990 ₽</div>
+            <ul>
+              <li>Безлимитное число диалогов и промптов</li>
+              <li>Пакетный экспорт всех диалогов в ZIP</li>
+              <li>Поиск по содержимому и тегам</li>
+              <li>Автосохранение диалогов</li>
+              <li>Разовая оплата, навсегда</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="hint">
+          <span class="icon">🧩</span>
+          <span>Нажмите иконку расширения в панели инструментов Chrome</span>
+        </div>
+      </div>
+
+      <div class="footer">Версия 1.0 · Расширение работает офлайн</div>
+      <div class="contacts">
+        Email: s.u.rybnikov @ yandex.ru · Сайт: surybnikov-coder.github.io/ai-prompt-manager<br>
+        Действует с: 10 октября 2026 г.
+      </div>
+    </div>
+  </div>
+</body>
+</html>
