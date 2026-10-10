@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Prompt Manager — сохранение AI-чатов</title>
+  <meta name="description" content="Сохраняйте диалоги из ChatGPT, Claude, Gemini и других AI прямо на компьютер. Поиск, теги, промпты — всё офлайн.">
+  <style>
+    :root {
+      --bg: #0d1117;
+      --card: #161b22;
+      --text: #e6edf3;
+      --muted: #8b949e;
+      --accent: #58a6ff;
+      --accent-hover: #79b8ff;
+      --border: #30363d;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 48px;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .logo {
+      font-weight: 700;
+      font-size: 1.3rem;
+      color: var(--accent);
+    }
+    .lang-switch {
+      display: flex;
+      gap: 8px;
+    }
+    .lang-switch a {
+      color: var(--muted);
+      text-decoration: none;
+      padding: 4px 10px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      font-size: 0.9rem;
+    }
+    .lang-switch a.active {
+      color: var(--bg);
+      background: var(--accent);
+      border-color: var(--accent);
+    }
+    .hero {
+      text-align: center;
+      padding: 40px 0 60px;
+    }
+    .hero h1 {
+      font-size: 2.4rem;
+      margin: 0 0 20px;
+      line-height: 1.2;
+    }
+    .hero p {
+      font-size: 1.15rem;
+      color: var(--muted);
+      max-width: 600px;
+      margin: 0 auto 32px;
+    }
+    .btn {
+      display: inline-block;
+      padding: 14px 28px;
+      border-radius: 8px;
+      background: var(--accent);
+      color: var(--bg);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: background 0.2s;
+    }
+    .btn:hover { background: var(--accent-hover); }
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+      margin: 40px 0;
+    }
+    .feature {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+    }
+    .feature h3 {
+      margin: 0 0 10px;
+      font-size: 1.1rem;
+      color: var(--accent);
+    }
+    .feature p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+    footer {
+      text-align: center;
+      margin-top: 60px;
+      padding-top: 30px;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+    footer a { color: var(--accent); text-decoration: none; }
+    .hidden { display: none; }
+    @media (max-width: 500px) {
+      .hero h1 { font-size: 1.8rem; }
+      header { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="logo">AI Prompt Manager</div>
+      <div class="lang-switch">
+        <a href="#ru" data-set="ru" class="active">RU</a>
+        <a href="#en" data-set="en">EN</a>
+      </div>
+    </header>
+
+    <!-- Russian -->
+    <div data-lang="ru">
+      <section class="hero">
+        <h1>AI Prompt Manager</h1>
+        <p>Сохраняйте диалоги из ChatGPT, Claude, Gemini и других AI прямо на компьютер. Поиск, теги, промпты — всё офлайн и под вашим контролем.</p>
+        <a class="btn" href="https://chrome.google.com/webstore/devconsole" target="_blank" rel="noopener">Установить из Chrome Web Store</a>
+      </section>
+
+      <section class="features">
+        <div class="feature">
+          <h3>Экспорт чатов</h3>
+          <p>Сохраняйте полные диалоги с AI в один клик в удобном формате.</p>
+        </div>
+        <div class="feature">
+          <h3>Быстрый поиск</h3>
+          <p>Находите нужные фрагменты по ключевым словам среди всех сохранённых чатов.</p>
+        </div>
+        <div class="feature">
+          <h3>Теги и промпты</h3>
+          <p>Организуйте полезные промпты и ответы AI с помощью тегов.</p>
+        </div>
+        <div class="feature">
+          <h3>Полностью офлайн</h3>
+          <p>Данные хранятся локально в вашем браузере, без облачных серверов.</p>
+        </div>
+      </section>
+    </div>
+
+    <!-- English -->
+    <div data-lang="en" class="hidden">
+      <section class="hero">
+        <h1>AI Prompt Manager</h1>
+        <p>Save conversations from ChatGPT, Claude, Gemini and other AI assistants directly to your computer. Search, tags, prompts — all offline and under your control.</p>
+        <a class="btn" href="https://chrome.google.com/webstore/devconsole" target="_blank" rel="noopener">Install from Chrome Web Store</a>
+      </section>
+
+      <section class="features">
+        <div class="feature">
+          <h3>Export chats</h3>
+          <p>Save complete AI conversations in one click in a convenient format.</p>
+        </div>
+        <div class="feature">
+          <h3>Fast search</h3>
+          <p>Find the exact snippet by keyword across all saved chats.</p>
+        </div>
+        <div class="feature">
+          <h3>Tags and prompts</h3>
+          <p>Organize useful prompts and AI replies with custom tags.</p>
+        </div>
+        <div class="feature">
+          <h3>Fully offline</h3>
+          <p>Data is stored locally in your browser, with no cloud servers involved.</p>
+        </div>
+      </section>
+    </div>
+
+    <footer>
+      <p>
+        <span data-lang="ru">Контакты:</span>
+        <span data-lang="en" class="hidden">Contact:</span>
+        <a href="mailto:ai-prompt-manager@example.com">ai-prompt-manager@example.com</a> |
+        <a href="privacy.html">Privacy Policy</a>
+      </p>
+      <p>© 2026 AI Prompt Manager</p>
+    </footer>
+  </div>
+
+  <script>
+    function setLang(lang) {
+      document.querySelectorAll('[data-lang]').forEach(el => {
+        el.classList.toggle('hidden', el.dataset.lang !== lang);
+      });
+      document.querySelectorAll('[data-set]').forEach(a => {
+        a.classList.toggle('active', a.dataset.set === lang);
+      });
+      document.documentElement.lang = lang;
+    }
+    const initial = (location.hash || '#ru').replace('#', '') === 'en' ? 'en' : 'ru';
+    setLang(initial);
+    document.querySelectorAll('[data-set]').forEach(a => {
+      a.addEventListener('click', e => {
+        e.preventDefault();
+        const lang = a.dataset.set;
+        history.replaceState(null, null, '#' + lang);
+        setLang(lang);
+      });
+    });
+  </script>
+</body>
+</html>
