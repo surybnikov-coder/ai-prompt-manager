@@ -6,19 +6,40 @@
   <title>AI Prompt Manager — сохранение AI-чатов</title>
   <meta name="description" content="Сохраняйте диалоги из ChatGPT, Claude, Gemini и других AI прямо на компьютер. Поиск, теги, промпты — всё офлайн.">
   <style>
+    @font-face {
+      font-family: "Space Grotesk";
+      src: url("fonts/SpaceGrotesk-Regular.woff2") format("woff2");
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: "Space Grotesk";
+      src: url("fonts/SpaceGrotesk-Medium.woff2") format("woff2");
+      font-weight: 500;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: "Space Grotesk";
+      src: url("fonts/SpaceGrotesk-Bold.woff2") format("woff2");
+      font-weight: 700;
+      font-style: normal;
+      font-display: swap;
+    }
     :root {
-      --bg: #0d1117;
-      --card: #161b22;
-      --text: #e6edf3;
-      --muted: #8b949e;
-      --accent: #58a6ff;
-      --accent-hover: #79b8ff;
-      --border: #30363d;
+      --bg: #000000;
+      --card: #181818;
+      --text: #ffffff;
+      --muted: #b3b3b3;
+      --accent: #1db954;
+      --accent-hover: #1ed760;
+      --border: rgba(255,255,255,0.08);
     }
     * { box-sizing: border-box; }
     body {
       margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-family: "Space Grotesk", sans-serif;
       background: var(--bg);
       color: var(--text);
       line-height: 1.6;
@@ -39,8 +60,9 @@
     .logo {
       font-weight: 700;
       font-size: 1.3rem;
-      color: var(--accent);
+      color: var(--text);
     }
+    .logo span { color: var(--accent); }
     .lang-switch {
       display: flex;
       gap: 8px;
@@ -48,10 +70,11 @@
     .lang-switch a {
       color: var(--muted);
       text-decoration: none;
-      padding: 4px 10px;
-      border-radius: 6px;
-      border: 1px solid var(--border);
-      font-size: 0.9rem;
+      padding: 6px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.15);
+      font-size: 0.85rem;
+      font-weight: 600;
     }
     .lang-switch a.active {
       color: var(--bg);
@@ -62,50 +85,165 @@
       text-align: center;
       padding: 40px 0 60px;
     }
+    .hero .logo-icon {
+      width: 72px;
+      height: 72px;
+      margin: 0 auto 24px;
+      border-radius: 50%;
+      background: var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 30px;
+    }
     .hero h1 {
       font-size: 2.4rem;
-      margin: 0 0 20px;
+      margin: 0 0 16px;
       line-height: 1.2;
     }
     .hero p {
-      font-size: 1.15rem;
+      font-size: 1.1rem;
       color: var(--muted);
-      max-width: 600px;
+      max-width: 620px;
       margin: 0 auto 32px;
+    }
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: center;
+      margin-bottom: 16px;
     }
     .btn {
       display: inline-block;
       padding: 14px 28px;
-      border-radius: 8px;
+      border-radius: 999px;
       background: var(--accent);
-      color: var(--bg);
+      color: #000;
       text-decoration: none;
-      font-weight: 600;
+      font-weight: 700;
       font-size: 1rem;
       transition: background 0.2s;
+      border: none;
+      cursor: pointer;
     }
     .btn:hover { background: var(--accent-hover); }
+    .btn-secondary {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid rgba(255,255,255,0.25);
+    }
+    .btn-secondary:hover { background: rgba(255,255,255,0.08); }
     .features {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 20px;
+      gap: 16px;
       margin: 40px 0;
     }
     .feature {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
       background: var(--card);
       border: 1px solid var(--border);
       border-radius: 12px;
-      padding: 24px;
+      padding: 18px;
+      text-align: left;
+    }
+    .feature .icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: rgba(29, 185, 84, 0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      flex-shrink: 0;
     }
     .feature h3 {
-      margin: 0 0 10px;
-      font-size: 1.1rem;
-      color: var(--accent);
+      margin: 0 0 6px;
+      font-size: 1rem;
+      color: var(--text);
     }
     .feature p {
       margin: 0;
       color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.4;
+    }
+    .plans {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin: 48px 0 40px;
+    }
+    .plan {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 22px;
+      text-align: left;
+      display: flex;
+      flex-direction: column;
+    }
+    .plan h3 {
+      margin: 0 0 12px;
+      font-size: 1rem;
+      font-weight: 700;
+    }
+    .plan.pro { border-color: rgba(29, 185, 84, 0.35); }
+    .plan.pro h3 { color: var(--accent); }
+    .plan ul {
+      margin: 0 0 18px;
+      padding-left: 18px;
+      font-size: 0.9rem;
+      color: var(--muted);
+      line-height: 1.5;
+      flex-grow: 1;
+    }
+    .plan li { margin-bottom: 6px; }
+    .plan .btn {
+      width: 100%;
+      text-align: center;
+      padding: 12px 20px;
       font-size: 0.95rem;
+    }
+    .buy-form { width: 100%; margin-top: 14px; }
+    .buy-form input[type="email"] {
+      width: 100%;
+      padding: 12px 16px;
+      margin-bottom: 10px;
+      background: #0d0d0d;
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 999px;
+      color: #fff;
+      font-size: 0.9rem;
+      font-family: inherit;
+      outline: none;
+    }
+    .buy-form input[type="email"]::placeholder { color: #888; }
+    .buy-form input[type="email"]:focus { border-color: #1db954; }
+    .buy-form .btn { border: none; cursor: pointer; font-family: inherit; }
+    .hint {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 18px;
+      background: rgba(29, 185, 84, 0.12);
+      border: 1px solid rgba(29, 185, 84, 0.25);
+      border-radius: 999px;
+      color: #fff;
+      font-size: 0.95rem;
+      margin-top: 8px;
+    }
+    .hint img {
+      width: 24px;
+      height: 24px;
+      border-radius: 6px;
+      display: block;
+      background: #121212;
+      object-fit: contain;
     }
     footer {
       text-align: center;
@@ -126,7 +264,7 @@
 <body>
   <div class="container">
     <header>
-      <div class="logo">AI Prompt Manager</div>
+      <div class="logo">AI <span>Prompt</span> Manager</div>
       <div class="lang-switch">
         <a href="#ru" data-set="ru" class="active">RU</a>
         <a href="#en" data-set="en">EN</a>
@@ -136,57 +274,131 @@
     <!-- Russian -->
     <div data-lang="ru">
       <section class="hero">
-        <h1>AI Prompt Manager</h1>
-        <p>Сохраняйте диалоги из ChatGPT, Claude, Gemini и других AI прямо на компьютер. Поиск, теги, промпты — всё офлайн и под вашим контролем.</p>
-        <a class="btn" href="https://chrome.google.com/webstore/devconsole" target="_blank" rel="noopener">Установить из Chrome Web Store</a>
+        <div class="logo-icon">💬</div>
+        <h1>Экспортируйте AI-диалоги в Markdown, TXT, JSON</h1>
+        <p>Сохраняйте чаты из ChatGPT, Claude, Gemini, DeepSeek, Ashna AI и ГигаЧат прямо на компьютер. Данные хранятся локально, проверка Pro-лицензии выполняется офлайн на устройстве.</p>
+        <div class="hero-actions">
+          <a class="btn" href="https://chrome.google.com/webstore/devconsole" target="_blank" rel="noopener" id="install-ru">Установить из Chrome Web Store</a>
+          <a class="btn btn-secondary" href="#buy" id="buy-ru">Купить Про — Навсегда — 999 ₽</a>
+        </div>
       </section>
 
       <section class="features">
         <div class="feature">
-          <h3>Экспорт чатов</h3>
-          <p>Сохраняйте полные диалоги с AI в один клик в удобном формате.</p>
+          <span class="icon">📥</span>
+          <div><h3>Полный экспорт чатов</h3><p>Собирает всю историю сообщений и сохраняет одним кликом.</p></div>
         </div>
         <div class="feature">
-          <h3>Быстрый поиск</h3>
-          <p>Находите нужные фрагменты по ключевым словам среди всех сохранённых чатов.</p>
+          <span class="icon">🔍</span>
+          <div><h3>Быстрый поиск</h3><p>Находите фрагменты по ключевым словам среди сохранённых чатов.</p></div>
         </div>
         <div class="feature">
-          <h3>Теги и промпты</h3>
-          <p>Организуйте полезные промпты и ответы AI с помощью тегов.</p>
+          <span class="icon">🏷️</span>
+          <div><h3>Теги и библиотека промптов</h3><p>Организуйте диалоги, полезные промпты и ответы AI.</p></div>
         </div>
         <div class="feature">
-          <h3>Полностью офлайн</h3>
-          <p>Данные хранятся локально в вашем браузере, без облачных серверов.</p>
+          <span class="icon">🔒</span>
+          <div><h3>Безопасность</h3><p>Диалоги хранятся локально; проверка лицензии — офлайн на устройстве.</p></div>
         </div>
       </section>
+
+      <section class="plans" id="buy">
+        <div class="plan">
+          <h3>Free</h3>
+          <ul>
+            <li>12 экспортов диалогов</li>
+            <li>Экспорт только в Markdown</li>
+            <li>До 20 промптов</li>
+            <li>Поиск и теги</li>
+            <li>Локальное хранение</li>
+          </ul>
+          <a class="btn btn-secondary" href="https://chrome.google.com/webstore/devconsole" target="_blank" rel="noopener">Установить бесплатно</a>
+        </div>
+        <div class="plan pro">
+          <h3>Про — Навсегда — 999 ₽</h3>
+          <ul>
+            <li>Безлимитный экспорт</li>
+            <li>Markdown, TXT, JSON</li>
+            <li>Автоэкспорт при закрытии вкладки</li>
+            <li>Безлимитные диалоги и промпты</li>
+            <li>Разовая оплата, навсегда</li>
+          </ul>
+          <form class="buy-form" data-lang-form="ru">
+            <input type="email" placeholder="Email для получения ключа" required>
+            <button type="submit" class="btn">Купить Про — Навсегда</button>
+          </form>
+        </div>
+      </section>
+
+      <div class="hint">
+        <img src="icons/icon48.png" alt="AI Prompt Manager" width="24" height="24">
+        <span>После установки нажмите эту иконку в панели инструментов Chrome</span>
+      </div>
     </div>
 
     <!-- English -->
     <div data-lang="en" class="hidden">
       <section class="hero">
-        <h1>AI Prompt Manager</h1>
-        <p>Save conversations from ChatGPT, Claude, Gemini and other AI assistants directly to your computer. Search, tags, prompts — all offline and under your control.</p>
-        <a class="btn" href="https://chrome.google.com/webstore/devconsole" target="_blank" rel="noopener">Install from Chrome Web Store</a>
+        <div class="logo-icon">💬</div>
+        <h1>Export AI chats to Markdown, TXT, JSON</h1>
+        <p>Save chats from ChatGPT, Claude, Gemini, DeepSeek, Ashna AI and GigaChat directly to your computer. Data stays local; Pro license verification happens offline on your device.</p>
+        <div class="hero-actions">
+          <a class="btn" href="https://chrome.google.com/webstore/devconsole" target="_blank" rel="noopener" id="install-en">Install from Chrome Web Store</a>
+          <a class="btn btn-secondary" href="#buy" id="buy-en">Buy Про — Навсегда — 999 ₽</a>
+        </div>
       </section>
 
       <section class="features">
         <div class="feature">
-          <h3>Export chats</h3>
-          <p>Save complete AI conversations in one click in a convenient format.</p>
+          <span class="icon">📥</span>
+          <div><h3>Full chat export</h3><p>Captures the full message history and saves it with one click.</p></div>
         </div>
         <div class="feature">
-          <h3>Fast search</h3>
-          <p>Find the exact snippet by keyword across all saved chats.</p>
+          <span class="icon">🔍</span>
+          <div><h3>Fast search</h3><p>Find snippets by keyword across all saved chats.</p></div>
         </div>
         <div class="feature">
-          <h3>Tags and prompts</h3>
-          <p>Organize useful prompts and AI replies with custom tags.</p>
+          <span class="icon">🏷️</span>
+          <div><h3>Tags and prompt library</h3><p>Organize dialogs, useful prompts and AI replies.</p></div>
         </div>
         <div class="feature">
-          <h3>Fully offline</h3>
-          <p>Data is stored locally in your browser, with no cloud servers involved.</p>
+          <span class="icon">🔒</span>
+          <div><h3>Security</h3><p>Your chats stay local; license verification is performed offline on the device.</p></div>
         </div>
       </section>
+
+      <section class="plans" id="buy">
+        <div class="plan">
+          <h3>Free</h3>
+          <ul>
+            <li>12 dialog exports</li>
+            <li>Markdown export only</li>
+            <li>Up to 20 prompts</li>
+            <li>Search and tags</li>
+            <li>Local storage</li>
+          </ul>
+          <a class="btn btn-secondary" href="https://chrome.google.com/webstore/devconsole" target="_blank" rel="noopener">Install for free</a>
+        </div>
+        <div class="plan pro">
+          <h3>Про — Навсегда — 999 ₽</h3>
+          <ul>
+            <li>Unlimited exports</li>
+            <li>Markdown, TXT, JSON</li>
+            <li>Auto-export on tab close</li>
+            <li>Unlimited dialogs and prompts</li>
+            <li>One-time payment, forever</li>
+          </ul>
+          <form class="buy-form" data-lang-form="en">
+            <input type="email" placeholder="Email to receive the key" required>
+            <button type="submit" class="btn">Buy Про — Навсегда</button>
+          </form>
+        </div>
+      </section>
+
+      <div class="hint">
+        <img src="icons/icon48.png" alt="AI Prompt Manager" width="24" height="24">
+        <span>After installation, click this icon in the Chrome toolbar</span>
+      </div>
     </div>
 
     <footer>
@@ -218,6 +430,20 @@
         const lang = a.dataset.set;
         history.replaceState(null, null, '#' + lang);
         setLang(lang);
+      });
+    });
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    document.querySelectorAll('.buy-form').forEach(form => {
+      form.addEventListener('submit', e => {
+        e.preventDefault();
+        const email = form.querySelector('input[type="email"]').value.trim().toLowerCase();
+        if (!emailRegex.test(email)) {
+          alert('Некорректный email / Invalid email');
+          return;
+        }
+        const url = `https://api.aixport.ru/buy?email=${encodeURIComponent(email)}`;
+        window.open(url, '_blank', 'noopener');
       });
     });
   </script>

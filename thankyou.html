@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Спасибо за покупку — AI Prompt Manager</title>
+  <style>
+    @font-face {
+      font-family: "Space Grotesk";
+      src: url("fonts/SpaceGrotesk-Regular.woff2") format("woff2");
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: "Space Grotesk";
+      src: url("fonts/SpaceGrotesk-Medium.woff2") format("woff2");
+      font-weight: 500;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: "Space Grotesk";
+      src: url("fonts/SpaceGrotesk-Bold.woff2") format("woff2");
+      font-weight: 700;
+      font-style: normal;
+      font-display: swap;
+    }
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      background: #000;
+      color: #fff;
+      font-family: "Space Grotesk", sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .card {
+      background: #181818;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px;
+      padding: 40px 32px;
+      max-width: 440px;
+      text-align: center;
+    }
+    .logo {
+      width: 72px;
+      height: 72px;
+      margin: 0 auto 20px;
+      border-radius: 50%;
+      background: #1db954;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 30px;
+    }
+    h1 { margin: 0 0 12px; font-size: 22px; font-weight: 700; }
+    p { color: #b3b3b3; font-size: 14px; line-height: 1.5; margin-bottom: 24px; }
+    .key-box {
+      background: #121212;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 12px;
+      padding: 16px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 13px;
+      word-break: break-all;
+      color: #fff;
+      margin-bottom: 24px;
+    }
+    .btn {
+      display: inline-block;
+      padding: 12px 24px;
+      border-radius: 999px;
+      background: #1db954;
+      color: #000;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 13px;
+    }
+    .footer { margin-top: 24px; font-size: 12px; color: #666; }
+    .warning { margin-top: 16px; font-size: 12px; color: #ff8c42; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="logo">💬</div>
+    <h1>Спасибо за покупку!</h1>
+    <p>Лицензионный ключ был отправлен на ваш email. Вставьте его в настройках расширения, чтобы активировать Pro.</p>
+    <div class="key-box" id="license-key">Загрузка ключа...</div>
+    <a href="#" class="btn" id="open-options">Открыть настройки расширения</a>
+    <div class="warning">Сохраните ключ в надёжном месте. Мы не восстанавливаем потерянные ключи.</div>
+    <div class="footer">Если ключ не пришёл, проверьте папку «Спам».</div>
+  </div>
+
+  <script>
+    const params = new URLSearchParams(location.search);
+    const key = params.get("key") || "Ключ не найден. Обратитесь в поддержку.";
+    document.getElementById("license-key").textContent = key;
+    document.getElementById("open-options").addEventListener("click", (e) => {
+      e.preventDefault();
+      if (typeof chrome !== "undefined" && chrome.runtime && chrome.runtime.openOptionsPage) {
+        chrome.runtime.openOptionsPage();
+      } else {
+        alert("Откройте настройки расширения вручную через chrome://extensions/");
+      }
+    });
+  </script>
+</body>
+</html>

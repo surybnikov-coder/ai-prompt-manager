@@ -1,23 +1,44 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Privacy Policy — AI Prompt Manager</title>
   <meta name="description" content="Privacy policy for AI Prompt Manager Chrome extension.">
   <style>
+    @font-face {
+      font-family: "Space Grotesk";
+      src: url("fonts/SpaceGrotesk-Regular.woff2") format("woff2");
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: "Space Grotesk";
+      src: url("fonts/SpaceGrotesk-Medium.woff2") format("woff2");
+      font-weight: 500;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: "Space Grotesk";
+      src: url("fonts/SpaceGrotesk-Bold.woff2") format("woff2");
+      font-weight: 700;
+      font-style: normal;
+      font-display: swap;
+    }
     :root {
-      --bg: #0d1117;
-      --card: #161b22;
-      --text: #e6edf3;
-      --muted: #8b949e;
-      --accent: #58a6ff;
-      --border: #30363d;
+      --bg: #000000;
+      --card: #181818;
+      --text: #ffffff;
+      --muted: #b3b3b3;
+      --accent: #1db954;
+      --border: rgba(255,255,255,0.08);
     }
     * { box-sizing: border-box; }
     body {
       margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-family: "Space Grotesk", sans-serif;
       background: var(--bg);
       color: var(--text);
       line-height: 1.7;
@@ -27,19 +48,32 @@
       margin: 0 auto;
       padding: 40px 20px;
     }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 32px;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .logo {
+      font-weight: 700;
+      font-size: 1.3rem;
+      color: var(--text);
+    }
+    .logo span { color: var(--accent); }
     .lang-switch {
       display: flex;
       gap: 8px;
-      justify-content: flex-end;
-      margin-bottom: 24px;
     }
     .lang-switch a {
       color: var(--muted);
       text-decoration: none;
-      padding: 4px 10px;
-      border-radius: 6px;
-      border: 1px solid var(--border);
-      font-size: 0.9rem;
+      padding: 6px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.15);
+      font-size: 0.85rem;
+      font-weight: 600;
     }
     .lang-switch a.active {
       color: var(--bg);
@@ -49,7 +83,7 @@
     h1 {
       font-size: 2rem;
       margin-bottom: 8px;
-      color: var(--accent);
+      color: var(--text);
     }
     .date {
       color: var(--muted);
@@ -57,98 +91,134 @@
       font-size: 0.95rem;
     }
     h2 {
-      font-size: 1.25rem;
+      font-size: 1.15rem;
       margin-top: 32px;
       margin-bottom: 12px;
-      color: var(--text);
+      color: var(--accent);
     }
     p, ul {
       color: var(--muted);
       margin: 0 0 16px;
+      font-size: 0.95rem;
     }
     ul { padding-left: 20px; }
-    li { margin-bottom: 6px; }
+    li { margin-bottom: 8px; }
     a { color: var(--accent); text-decoration: none; }
+    footer {
+      text-align: center;
+      margin-top: 60px;
+      padding-top: 30px;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+    footer a { color: var(--accent); text-decoration: none; }
     .hidden { display: none; }
     @media (max-width: 500px) {
       h1 { font-size: 1.5rem; }
+      header { flex-direction: column; align-items: flex-start; }
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <div class="lang-switch">
-      <a href="#ru" data-set="ru" class="active">RU</a>
-      <a href="#en" data-set="en">EN</a>
-    </div>
+    <header>
+      <a href="index.html" class="logo">AI <span>Prompt</span> Manager</a>
+      <div class="lang-switch">
+        <a href="#ru" data-set="ru" class="active">RU</a>
+        <a href="#en" data-set="en">EN</a>
+      </div>
+    </header>
 
     <!-- Russian -->
     <div data-lang="ru">
       <h1>Политика конфиденциальности</h1>
-      <p class="date">Последнее обновление: 10 октября 2026 г.</p>
+      <p class="date">Последнее обновление: 11 октября 2026 г.</p>
 
-      <p>Настоящая Политика конфиденциальности описывает, как расширение <strong>AI Prompt Manager</strong> («мы», «наше расширение») обрабатывает данные пользователей.</p>
+      <p>AI Prompt Manager — расширение для локального сохранения истории AI-чатов. Мы не собираем содержимое ваших чатов и не передаём их третьим лицам.</p>
 
-      <h2>1. Какие данные собираются</h2>
-      <p>Расширение работает локально в вашем браузере. Мы не отправляем ваши данные на наши серверы. Могут сохраняться только те данные, которые вы явно выбрали для сохранения, например:</p>
+      <h2>1. Какие данные хранятся</h2>
       <ul>
-        <li>Текст диалогов и сообщений из веб-страниц с AI-чатами;</li>
-        <li>Теги, заметки и структуру папок, которые вы создаёте внутри расширения;</li>
-        <li>Настройки расширения.</li>
+        <li>Сохранённые диалоги, теги и промпты хранятся локально в браузере через IndexedDB и chrome.storage.</li>
+        <li>Email и лицензионный ключ сохраняются локально для проверки Pro-статуса.</li>
+        <li>Файлы экспорта (.md, .txt, .json) сохраняются в папку загрузок вашего компьютера.</li>
       </ul>
 
-      <h2>2. Где хранятся данные</h2>
-      <p>Все сохранённые данные хранятся локально в вашем браузере с использованием механизмов Chrome Storage (chrome.storage.local) и/или IndexedDB. Мы не используем внешние базы данных и не передаём данные в облако.</p>
+      <h2>2. Какие данные НЕ собираются</h2>
+      <ul>
+        <li>Мы не используем аналитику, трекинг и телеметрию.</li>
+        <li>Мы не отправляем содержимое ваших чатов на удалённые серверы.</li>
+        <li>Мы не продаём и не передаём данные третьим лицам.</li>
+      </ul>
 
-      <h2>3. Передача третьим лицам</h2>
-      <p>Мы не продаём, не передаём и не раскрываем ваши данные третьим лицам. Расширение не использует аналитику, рекламные сети и сторонние трекеры.</p>
+      <h2>3. Проверка лицензии Pro</h2>
+      <p>Для проверки статуса Pro расширение отправляет на наш сервер только email и лицензионный ключ. Мы не собираем содержимое диалогов. Ключ и email не передаются третьим лицам.</p>
 
-      <h2>4. Разрешения браузера</h2>
-      <p>Расширение запрашивает доступ только к тем веб-страницам, где это необходимо для сохранения диалогов. Вы можете отозвать доступ в любой момент через настройки расширений Chrome.</p>
+      <h2>4. Покупка Про — Навсегда</h2>
+      <p>При нажатии кнопки «Купить Про — Навсегда» вы переходите на защищённую страницу оплаты ЮKassa. Email передаётся в URL только для генерации лицензионного ключа. Оплата обрабатывается ЮKassa.</p>
+      <p>После покупки ключ отправляется на указанный email. Мы не храним ключи отдельно от записей о транзакциях и не восстанавливаем потерянные ключи.</p>
 
-      <h2>5. Безопасность</h2>
-      <p>Мы принимаем разумные меры для защиты ваших данных, однако помните: любое расширение браузера зависит от безопасности вашего устройства и учётной записи Google.</p>
+      <h2>5. Разрешения браузера</h2>
+      <p>Расширение запрашивает доступ только к веб-страницам с AI-чатами, где необходимо сохранение диалогов. Доступ можно отозвать в настройках Chrome.</p>
 
-      <h2>6. Изменения в политике</h2>
-      <p>Мы можем обновлять эту политику. При существенных изменениях мы уведомим вас через обновление расширения или на этом сайте.</p>
+      <h2>6. Безопасность</h2>
+      <p>Лицензионные секреты хранятся только на сервере, а не в коде расширения. Любое расширение зависит от безопасности вашего устройства и учётной записи Google.</p>
 
-      <h2>7. Контакты</h2>
-      <p>По вопросам конфиденциальности пишите: <span>s.u.rybnikov @ yandex.ru</span></p>
+      <h2>7. Изменения</h2>
+      <p>Мы можем обновлять эту политику при изменении функциональности. Актуальная версия всегда доступна на этой странице.</p>
+
+      <h2>8. Контакты</h2>
+      <p>По вопросам конфиденциальности: s.u.rybnikov @ yandex.ru</p>
     </div>
 
     <!-- English -->
     <div data-lang="en" class="hidden">
       <h1>Privacy Policy</h1>
-      <p class="date">Last updated: October 10, 2026</p>
+      <p class="date">Last updated: October 11, 2026</p>
 
-      <p>This Privacy Policy describes how the <strong>AI Prompt Manager</strong> extension ("we", "our extension") handles user data.</p>
+      <p>AI Prompt Manager is a Chrome extension for saving AI chat history locally. We do not collect the content of your chats or share it with third parties.</p>
 
-      <h2>1. Data we collect</h2>
-      <p>The extension operates locally inside your browser. We do not send your data to our servers. Only data you explicitly choose to save may be stored, such as:</p>
+      <h2>1. Data we store</h2>
       <ul>
-        <li>Text of conversations and messages from AI chat web pages;</li>
-        <li>Tags, notes, and folder structures you create inside the extension;</li>
-        <li>Extension settings.</li>
+        <li>Saved dialogs, tags, and prompts are stored locally in your browser via IndexedDB and chrome.storage.</li>
+        <li>Email and license key are stored locally to verify Pro status.</li>
+        <li>Exported files (.md, .txt, .json) are saved to your computer's Downloads folder.</li>
       </ul>
 
-      <h2>2. Where data is stored</h2>
-      <p>All saved data is stored locally in your browser using Chrome Storage (chrome.storage.local) and/or IndexedDB. We do not use external databases or transfer data to the cloud.</p>
+      <h2>2. Data we do NOT collect</h2>
+      <ul>
+        <li>We do not use analytics, tracking, or telemetry.</li>
+        <li>We do not send your chat content to remote servers.</li>
+        <li>We do not sell or share data with third parties.</li>
+      </ul>
 
-      <h2>3. Sharing with third parties</h2>
-      <p>We do not sell, share, or disclose your data to third parties. The extension does not use analytics, advertising networks, or third-party trackers.</p>
+      <h2>3. Pro license verification</h2>
+      <p>To verify Pro status the extension sends only your email and license key to our server. We do not collect dialog content. Your key and email are not shared with third parties.</p>
 
-      <h2>4. Browser permissions</h2>
-      <p>The extension requests access only to web pages where it is necessary to save conversations. You can revoke access at any time through Chrome extension settings.</p>
+      <h2>4. Purchasing Pro</h2>
+      <p>When you click «Buy Pro» you are redirected to the secure YooKassa checkout. Email is passed in the URL solely to generate a license key. Payment is processed by YooKassa.</p>
+      <p>After purchase the license key is sent to the provided email. We do not store keys separately from transaction records and do not recover lost keys.</p>
 
-      <h2>5. Security</h2>
-      <p>We take reasonable measures to protect your data. However, remember that any browser extension relies on the security of your device and Google account.</p>
+      <h2>5. Browser permissions</h2>
+      <p>The extension requests access only to AI chat web pages where saving dialogs is required. You can revoke access at any time in Chrome extension settings.</p>
 
-      <h2>6. Changes to this policy</h2>
-      <p>We may update this policy. For material changes, we will notify you through an extension update or on this website.</p>
+      <h2>6. Security</h2>
+      <p>License secrets are stored only on the server, not inside the extension code. Remember that any browser extension relies on the security of your device and Google account.</p>
 
-      <h2>7. Contact</h2>
-      <p>For privacy questions, contact us at: <span>s.u.rybnikov @ yandex.ru</span></p>
+      <h2>7. Changes</h2>
+      <p>We may update this policy when functionality changes. The current version is always available on this page.</p>
+
+      <h2>8. Contact</h2>
+      <p>For privacy questions: s.u.rybnikov @ yandex.ru</p>
     </div>
+
+    <footer>
+      <p>
+        <a href="index.html">Home</a> |
+        <span>s.u.rybnikov @ yandex.ru</span>
+      </p>
+      <p>© 2026 AI Prompt Manager</p>
+    </footer>
   </div>
 
   <script>
