@@ -450,11 +450,7 @@
     document.querySelectorAll('a[href^="#buy"]').forEach(link => {
       link.addEventListener('click', e => {
         e.preventDefault();
-        const lang = link.id === 'buy-en' ? 'en' : 'ru';
-        const form = document.querySelector(`.buy-form[data-lang-form="${lang}"]`);
-        if (form) {
-          form.scrollIntoView({ behavior: 'smooth', block: 'end' });
-        }
+        window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
       });
     });
   </script>
