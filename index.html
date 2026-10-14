@@ -449,12 +449,11 @@
 
     document.querySelectorAll('a[href^="#buy"]').forEach(link => {
       link.addEventListener('click', e => {
-        const targetId = link.getAttribute('href').slice(1);
-        const target = document.getElementById(targetId);
-        if (target) {
-          e.preventDefault();
-          const y = target.getBoundingClientRect().top + window.scrollY - 24;
-          window.scrollTo({ top: y, behavior: 'smooth' });
+        e.preventDefault();
+        const lang = link.id === 'buy-en' ? 'en' : 'ru';
+        const form = document.querySelector(`.buy-form[data-lang-form="${lang}"]`);
+        if (form) {
+          form.scrollIntoView({ behavior: 'smooth', block: 'end' });
         }
       });
     });
