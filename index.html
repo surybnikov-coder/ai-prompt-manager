@@ -63,6 +63,7 @@
       color: var(--text);
     }
     .logo span { color: var(--accent); }
+    .logo .logo-accent { color: var(--text); }
     .lang-switch {
       display: flex;
       gap: 8px;
@@ -264,7 +265,7 @@
 <body>
   <div class="container">
     <header>
-      <div class="logo"><span data-lang="ru">AI-промпт-менеджер</span><span data-lang="en" class="hidden">AI <span>Prompt</span> Manager</span></div>
+      <div class="logo"><span data-lang="ru">AI-<span class="logo-accent">промпт</span>-менеджер</span><span data-lang="en" class="hidden">AI <span class="logo-accent">Prompt</span> Manager</span></div>
       <div class="lang-switch">
         <a href="#ru" data-set="ru" class="active">RU</a>
         <a href="#en" data-set="en">EN</a>
