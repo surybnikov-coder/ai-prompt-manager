@@ -279,7 +279,7 @@
         <p>Сохраняйте чаты из ChatGPT, Claude, Gemini, DeepSeek, Ashna AI и ГигаЧат прямо на компьютер. Данные хранятся локально, проверка Pro-лицензии выполняется офлайн на устройстве.</p>
         <div class="hero-actions">
           <a class="btn" href="https://chrome.google.com/webstore/devconsole" target="_blank" rel="noopener" id="install-ru">Установить из Chrome Web Store</a>
-          <a class="btn btn-secondary" href="#buy" id="buy-ru">Купить Про — Навсегда — 990 ₽</a>
+          <a class="btn btn-secondary" href="#buy-ru" id="buy-ru">Купить Про — Навсегда — 990 ₽</a>
         </div>
       </section>
 
@@ -302,7 +302,7 @@
         </div>
       </section>
 
-      <section class="plans" id="buy">
+      <section class="plans" id="buy-ru">
         <div class="plan">
           <h3>Free</h3>
           <ul>
@@ -444,6 +444,13 @@
         }
         const url = `https://api.aixport.ru/buy?email=${encodeURIComponent(email)}`;
         window.open(url, '_blank', 'noopener');
+      });
+    });
+
+    document.querySelectorAll('a[href^="#buy"]').forEach(link => {
+      link.addEventListener('click', e => {
+        e.preventDefault();
+        window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
       });
     });
   </script>
